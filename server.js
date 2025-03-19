@@ -11,7 +11,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173", // change this to your frontend URL
+    origin: "https://imaginative-youtiao-079f60.netlify.app",
+    // origin: "http://localhost:5173", // change this to your frontend URL
     credentials: true, // enable set-cookie headers
   })
 );
