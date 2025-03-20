@@ -17,7 +17,9 @@ const allowedOrigins = {
 };
 
 // Get current environment (Render sets NODE_ENV to 'production' automatically)
-const environment = process.env.NODE_ENV || "development";
+// const environment = process.env.NODE_ENV || "development";
+const environment = process.env.NODE_ENV === "production" ? "production" : "development";
+
 const origin = allowedOrigins[environment];
 
 app.use(
