@@ -7,6 +7,7 @@ const logout = async (req, res) => {
         secure: process.env.NODE_ENV !== "development",
         sameSite: "Strict",
       })
+    
       .status(200)
       .json({ message: "User logged out successfully" });
   } catch (error) {
