@@ -13,7 +13,8 @@ app.use(cookieParser());
 // Determine which frontend URL to allow based on environment
 const allowedOrigins = {
   development: "http://localhost:5173",
-  production: "https://pr-frontend-one.vercel.app",
+  production:
+    "https://pr-frontend-163skvyjl-naveen-kumars-projects-d61c64bd.vercel.app",
 };
 
 // Get current environment (Render sets NODE_ENV to 'production' automatically)
