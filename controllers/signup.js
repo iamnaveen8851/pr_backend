@@ -2,7 +2,7 @@ const userModel = require("../models/userModel");
 
 const bcrypt = require("bcrypt");
 const generateToken = require("../lib/jwtToken");
-const setCookies = require("../lib/setCookie");
+
 require("dotenv").config();
 
 const signup = async (req, res) => {
@@ -39,13 +39,13 @@ const signup = async (req, res) => {
         process.env.JWT_SECRET
       );
 
-   
-      //setting cookies
-      await setCookies(token, res);
-
       res
         .status(201)
-        .json({ message: "User created successfully", user: newUser, accessToken: token });
+        .json({
+          message: "User created successfully",
+          user: newUser,
+          accessToken: token,
+        });
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
