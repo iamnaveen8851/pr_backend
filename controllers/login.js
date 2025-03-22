@@ -22,7 +22,7 @@ const login = async (req, res) => {
     }
 
     var token = jwt.sign(
-      { userId: existingUser.userId, username: existingUser.username },
+      { userId: existingUser._id, username: existingUser.username },
       process.env.JWT_SECRET,
       { expiresIn: "2d" }
     );
@@ -38,7 +38,7 @@ const login = async (req, res) => {
       .json({
         message: "Login successful",
         user: existingUser.username,
-        accessToken: token
+        accessToken: token,
       });
   } catch (error) {
     res.status(500).json({ message: error.message });
