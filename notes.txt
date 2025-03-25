@@ -1,0 +1,26 @@
+schema updaated --- done
+    - create users first with their roles -- Tomorrow --- done
+    - add Next Auth 
+    - change the res of users login as well because we need userId and username -- done
+
+
+Today
+taskRouter:
+  - CRUD ->  done
+  
+
+
+
+
+
+
+
+
+
+change in API
+
+
+
+
+
+

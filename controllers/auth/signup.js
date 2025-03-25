@@ -1,12 +1,12 @@
-const userModel = require("../models/userModel");
+const userModel = require("../../models/userModel");
 
 const bcrypt = require("bcrypt");
-const generateToken = require("../lib/jwtToken");
+const generateToken = require("../../lib/jwtToken");
 
 require("dotenv").config();
 
 const signup = async (req, res) => {
-  console.log("signup triggered", req.body);
+  console.log("signup route triggered", req.body);
   const { username, email, password } = req.body;
   try {
     const existingUser = await userModel.findOne({ email });
@@ -39,13 +39,11 @@ const signup = async (req, res) => {
         process.env.JWT_SECRET
       );
 
-      res
-        .status(201)
-        .json({
-          message: "User created successfully",
-          user: newUser,
-          accessToken: token,
-        });
+      res.status(201).json({
+        message: "User created successfully",
+        user: newUser,
+        accessToken: token,
+      });
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
