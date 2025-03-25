@@ -22,10 +22,21 @@ taskRouter.post(
   createTask
 );
 
-// updateTask
-taskRouter.patch("/updateTask/:id", updateTask);
+
+taskRouter.patch(
+  "/updateTask/:id",
+  authMiddleware,
+  authorizeRoles("Admin", "Manager"),
+  updateTask
+);
 
 // deleteTask
-taskRouter.delete("/deleteTask/:id", deleteTask);
+taskRouter.delete(
+  "/deleteTask/:id",
+  authMiddleware,
+  authorizeRoles("Admin", "Manager"),
+  deleteTask
+);
+
 
 module.exports = taskRouter;
