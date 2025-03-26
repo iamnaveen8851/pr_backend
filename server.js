@@ -6,7 +6,7 @@ const cors = require("cors");
 const userRouter = require("./routes/userRouter");
 const taskRouter = require("./routes/taskRouter");
 const authRouter = require("./routes/authRouter");
-const passport = require("../pr_backend/middlewares/passport");
+const passport = require("./middlewares/passport");
 const session = require("express-session");
 const app = express();
 
