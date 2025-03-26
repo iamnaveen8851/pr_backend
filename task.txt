@@ -1,0 +1,55 @@
+Overview: You will build a sophisticated Task Management System (TMS) designed to handle project and task tracking, along with advanced features like AI-powered task prioritization, real-time collaboration, and resource allocation optimization.
+
+Core Features:
+
+User Authentication and Roles: -- check[x]
+
+Implement user authentication with roles (Admin, Manager, Employee). --- check[x]
+
+Integrate NextAuth for third-party authentication (Google, GitHub, etc.).
+
+Task and Project Management:
+
+Users can create tasks, assign them to team members, and define task deadlines. --- check[x]
+
+Each task has customizable fields (Priority, Status, Dependencies, Estimated Time, etc.). --- check[x]
+
+Tasks are organized within projects, and each project can have different workflows. 
+
+Drag-and-drop functionality for task reordering and status updates (Kanban board view).
+
+AI-Powered Task Prioritization:
+
+Use an AI model (possibly GPT-4 or a custom model) to automatically suggest task prioritization based on factors such as urgency, dependencies, and historical task completion data.
+
+AI should learn from user feedback (e.g., if a task is marked as "high priority" repeatedly, the model should adjust).
+
+Time Tracking and Resource Allocation:
+
+Implement an advanced time-tracking system that tracks the time users spend on each task.
+
+Generate reports for managers on time spent, pending tasks, and team performance.
+
+Use machine learning to optimize task allocation based on team members' strengths and historical performance.
+
+Real-time Collaboration and Communication:
+
+Enable real-time messaging within tasks or projects. Users can leave comments, mention colleagues, and attach files.
+
+Support notifications (push and email) when there are updates or comments on tasks.
+
+Implement @mentions, and link related tasks to create a network of dependencies.
+
+Advanced Reporting and Analytics:
+
+Implement real-time project dashboards with task completion rates, timelines, and workload distribution.
+
+Managers can generate custom reports (e.g., performance, resource usage, project progress).
+
+Use data visualization libraries (e.g., D3.js, Chart.js) to represent data visually.
+
+Integrations:
+
+Integrate with popular tools like Trello, Jira, GitHub, Slack, or Google Calendar.
+
+Allow task creation and status synchronization with other platforms.
