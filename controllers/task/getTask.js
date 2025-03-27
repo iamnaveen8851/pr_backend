@@ -2,7 +2,11 @@ const taskModel = require("../../models/taskModel");
 
 const getTask = async (req, res) => {
   try {
-    const allTasks = await taskModel.find();
+    const allTasks = await taskModel
+      .find()
+      .populate("assignedTo", "username role" )
+      .populate("assignedBy", "username role")
+    
     res
       .status(200)
       .json({ message: "All tasks data have been fetched!", data: allTasks });

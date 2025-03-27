@@ -1,25 +1,9 @@
-schema updaated --- done
-    - create users first with their roles -- Tomorrow --- done
-    - add Next Auth 
-    - change the res of users login as well because we need userId and username -- done
 
+filter the task based on user Id a user should only see their task
 
-Today
-taskRouter:
-  - CRUD ->  done
-  - pushed in routers branch -- done
-  
-  
+but a admin can see all tasks of all users
+manager can only see employees task only   
 
-
-
-
-
-
-
-
-
-change in API
 
 
 

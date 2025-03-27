@@ -32,6 +32,8 @@ const createTask = async (req, res) => {
       task: newTask,
     });
   } catch (error) {
+    console.log(error);
+
     res.status(500).json({ message: error.message });
   }
 };

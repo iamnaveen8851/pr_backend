@@ -6,7 +6,7 @@ User Authentication and Roles: -- check[x]
 
 Implement user authentication with roles (Admin, Manager, Employee). --- check[x]
 
-Integrate NextAuth for third-party authentication (Google, GitHub, etc.).
+Integrate NextAuth for third-party authentication (Google, GitHub, etc.).  check[x]
 
 Task and Project Management:
 
