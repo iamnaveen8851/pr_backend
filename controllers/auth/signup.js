@@ -7,7 +7,7 @@ require("dotenv").config();
 
 const signup = async (req, res) => {
   console.log("signup route triggered", req.body);
-  const { username, email, password } = req.body;
+  const { username, email, password, role } = req.body;
   try {
     const existingUser = await userModel.findOne({ email });
 
@@ -26,6 +26,7 @@ const signup = async (req, res) => {
         username,
         email,
         password: hash,
+        role,
       });
 
       await newUser.save();
@@ -35,6 +36,7 @@ const signup = async (req, res) => {
         {
           userId: newUser.userId,
           username: newUser.username,
+          
         },
         process.env.JWT_SECRET
       );
