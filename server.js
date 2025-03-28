@@ -8,6 +8,7 @@ const taskRouter = require("./routes/taskRouter");
 const authRouter = require("./routes/authRouter");
 const passport = require("./middlewares/passport");
 const session = require("express-session");
+
 const app = express();
 
 // Add session middleware before other middleware

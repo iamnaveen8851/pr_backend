@@ -22,28 +22,11 @@ taskRouter.post(
   createTask
 );
 
-<<<<<<< Updated upstream
 
-=======
 // updateTask
->>>>>>> Stashed changes
-taskRouter.patch(
-  "/updateTask/:id",
-  authMiddleware,
-  authorizeRoles("Admin", "Manager"),
-  updateTask
-);
+taskRouter.patch("/updateTask/:id", updateTask);
 
 // deleteTask
-taskRouter.delete(
-  "/deleteTask/:id",
-  authMiddleware,
-  authorizeRoles("Admin", "Manager"),
-  deleteTask
-);
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
+taskRouter.delete("/deleteTask/:id", deleteTask);
 
 module.exports = taskRouter;
