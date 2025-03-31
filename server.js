@@ -27,17 +27,39 @@ app.use(passport.session());
 app.use(express.json());
 app.use(cookieParser());
 
+// app.use(
+//   cors({
+//     // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+//     origin: "http://localhost:5173", // DEV URL
+//     credentials: true, // enable set-cookie headers
+//   })
+// );
+
+// Updated CORS configuration to handle both environments
 app.use(
   cors({
-    origin: "https://pr-frontend-one.vercel.app", // // PRO URL
-    // origin: "http://localhost:5173", // DEV URL
-    credentials: true, // enable set-cookie headers
+    origin:
+      process.env.NODE_ENV === "production"
+        ? [
+            "https://pr-frontend-one.vercel.app",
+            "https://www.pr-frontend-one.vercel.app",
+          ]
+        : "http://localhost:5173",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
 
+// Log all incoming requests for debugging
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path} - Cookies:`, req.cookies);
+  next();
+});
+
 app.use("/users", userRouter);
 app.use("/tasks", taskRouter);
-app.use("/projects", projectRouter)
+app.use("/projects", projectRouter);
 app.use("/auth", authRouter);
 
 const PORT = process.env.PORT || 8080;
