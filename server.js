@@ -30,9 +30,9 @@ const app = express();
 // );
 // Add session middleware with MongoDB store
 
-if(process.env.RENDER){
+if (process.env.RENDER) {
   process.env.NODE_ENV = "production";
-  console.log("Running in production mode on Render")
+  console.log("Running in production mode on Render");
 }
 app.use(
   session({
@@ -56,26 +56,27 @@ app.use(passport.session());
 app.use(express.json());
 app.use(cookieParser());
 
-// app.use(
-//   cors({
-//     // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
-//     origin: "http://localhost:5173", // DEV URL
-//     credentials: true, // enable set-cookie headers
-//   })
-// );
-
-// Updated CORS configuration to handle both environments
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? "https://pr-frontend-one.vercel.app"
-        : "http://localhost:5173",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+    origin: "https://pr-frontendtesting01.vercel.app", // new pro url
+    // origin: "http://localhost:5173", // DEV URL
+    credentials: true, // enable set-cookie headers
   })
 );
+
+// Updated CORS configuration to handle both environments
+// app.use(
+//   cors({
+//     origin:
+//       process.env.NODE_ENV === "production"
+//         ? "https://pr-frontend-one.vercel.app"
+//         : "http://localhost:5173",
+//     credentials: true,
+//     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//   })
+// );
 
 // Log all incoming requests for debugging
 app.use((req, res, next) => {
