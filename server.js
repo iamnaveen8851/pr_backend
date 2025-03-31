@@ -9,15 +9,39 @@ const authRouter = require("./routes/authRouter");
 const passport = require("./middlewares/passport");
 const session = require("express-session");
 const projectRouter = require("./routes/projectRouter");
-
+const MongoStore = require("connect-mongo");
 const app = express();
 
 // Add session middleware before other middleware
+// app.use(
+//   session({
+//     secret: process.env.JWT_SECRET || "naveen",
+//     resave: false,
+//     saveUninitialized: false,
+//     store: MongoStore.create({
+//       mongoUrl: process.env.MONGODB_URI,
+//       ttl: 14 * 24 * 60 * 60,
+//       autoRemove: "native",
+//     }),
+//     cookie: {
+//       maxAge: 1000 * 60 * 60 * 24 * 14,
+//     }
+//   })
+// );
+// Add session middleware with MongoDB store
 app.use(
   session({
     secret: process.env.JWT_SECRET || "naveen",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_URI,
+      ttl: 14 * 24 * 60 * 60, // = 14 days. Default
+      autoRemove: "native", // Default
+    }),
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24 * 14, // 14 days
+    },
   })
 );
 
