@@ -29,6 +29,11 @@ const app = express();
 //   })
 // );
 // Add session middleware with MongoDB store
+
+if(process.env.RENDER){
+  process.env.NODE_ENV = "production";
+  console.log("Running in production mode on Render")
+}
 app.use(
   session({
     secret: process.env.JWT_SECRET || "naveen",
