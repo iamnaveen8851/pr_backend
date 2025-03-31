@@ -58,8 +58,8 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
-    origin: "https://pr-frontendtesting01.vercel.app", // new pro url
+    origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+    // origin: "https://pr-frontendtesting01.vercel.app", // new pro url
     // origin: "http://localhost:5173", // DEV URL
     credentials: true, // enable set-cookie headers
   })
