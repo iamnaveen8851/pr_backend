@@ -8,6 +8,7 @@ const taskRouter = require("./routes/taskRouter");
 const authRouter = require("./routes/authRouter");
 const passport = require("./middlewares/passport");
 const session = require("express-session");
+const projectRouter = require("./routes/projectRouter");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(
 
 app.use("/users", userRouter);
 app.use("/tasks", taskRouter);
+app.use("/projects", projectRouter)
 app.use("/auth", authRouter);
 
 const PORT = process.env.PORT || 8080;
