@@ -1,11 +1,16 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const authMiddleware = (req, res, next) => {
-  console.log("req.cookies", req);
-  const token =
-    req.cookie.jwtToken || req.header("Authorization")?.replace("Bearer ", "");
+  const token = req.cookies.jwtToken;
   
   console.log("token", token);
+  if (!token) {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith("Bearer")) {
+      token = authHeader.split(" ")[1];
+    }
+  }
+
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   }
