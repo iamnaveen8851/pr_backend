@@ -2,7 +2,10 @@ const userModel = require("../../models/userModel");
 
 const getUsers = async (req, res) => {
   try {
-    const AllUsers = await userModel.find();
+    const { role } = req.query;
+    // If role query parameter is provided, filter users by role
+    const filter = role ? { role } : {};
+    const AllUsers = await userModel.find(filter);
     res
       .status(200)
       .json({ message: "All users data have been fetched!", data: AllUsers });
