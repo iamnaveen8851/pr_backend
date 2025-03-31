@@ -19,7 +19,7 @@ authRouter.get(
 
     res.cookie("jwtToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
       maxAge: 2 * 60 * 60 * 1000,
     });
@@ -82,7 +82,7 @@ authRouter.post("/google/verify-token", async (req, res) => {
     // Set cookie and send response
     res.cookie("jwtToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development", // Changed from "development" to "production"
+      secure: process.env.NODE_ENV === "production", // Changed from "development" to "production"
       sameSite: "Strict",
       maxAge: 2 * 60 * 60 * 1000,
     });
@@ -117,7 +117,7 @@ authRouter.get(
 
     res.cookie("jwtToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
       maxAge: 2 * 60 * 60 * 1000,
     });
@@ -195,7 +195,7 @@ authRouter.post("/github-firebase", async (req, res) => {
     // Set cookie and send response
     res.cookie("jwtToken", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "development",
+      secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
       maxAge: 2 * 60 * 60 * 1000,
     });
