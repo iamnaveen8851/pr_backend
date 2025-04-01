@@ -3,9 +3,9 @@ require("dotenv").config();
 const authMiddleware = (req, res, next) => {
   const token =
     req.cookies.jwtToken || req.header("Authorization")?.replace("Bearer ", "");
-  console.log(req)
+  // console.log(req)
 
-  console.log("token", token);
+  // console.log("token", token);
 
 
   if (!token) {
