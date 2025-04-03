@@ -14,6 +14,7 @@ const http = require("http");
 const commentRouter = require("./routes/commentRouter");
 const notificationRouter = require("./routes/notificationRouter");
 const configureSocket = require("./utils/socket");
+const aiRouter = require("./routes/aiRouter");
 
 // create server using express
 const app = express();
@@ -56,9 +57,9 @@ app.use(cookieParser());
 // cors configuration
 app.use(
   cors({
-    origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+    // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
     // origin: "https://pr-frontendtesting01.vercel.app", // new pro url
-    // origin: "http://localhost:5173", // DEV URL
+    origin: "http://localhost:5173", // DEV URL
     credentials: true, // enable set-cookie headers
   })
 );
@@ -75,6 +76,7 @@ app.use("/projects", projectRouter);
 app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/notifications", notificationRouter);
+app.use("/ai", aiRouter)
 
 const PORT = process.env.PORT || 8080;
 

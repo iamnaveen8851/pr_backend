@@ -14,9 +14,9 @@ Users can create tasks, assign them to team members, and define task deadlines. 
 
 Each task has customizable fields (Priority, Status, Dependencies, Estimated Time, etc.). --- check[x]
 
-Tasks are organized within projects, and each project can have different workflows. 
+Tasks are organized within projects, and each project can have different workflows. --- check[x]
 
-Drag-and-drop functionality for task reordering and status updates (Kanban board view).
+Drag-and-drop functionality for task reordering and status updates (Kanban board view). ---check[x]
 
 AI-Powered Task Prioritization:
 
@@ -32,21 +32,21 @@ Generate reports for managers on time spent, pending tasks, and team performance
 
 Use machine learning to optimize task allocation based on team members' strengths and historical performance.
 
-Real-time Collaboration and Communication:
+Real-time Collaboration and Communication: --- check[x]
 
-Enable real-time messaging within tasks or projects. Users can leave comments, mention colleagues, and attach files.
+Enable real-time messaging within tasks or projects. Users can leave comments, mention colleagues, and attach files. 
 
-Support notifications (push and email) when there are updates or comments on tasks.
+Support notifications (push and email) when there are updates or comments on tasks. --- check[x]
 
-Implement @mentions, and link related tasks to create a network of dependencies.
+Implement @mentions, and link related tasks to create a network of dependencies.  
 
 Advanced Reporting and Analytics:
 
-Implement real-time project dashboards with task completion rates, timelines, and workload distribution.
+Implement real-time project dashboards with task completion rates, timelines, and workload distribution. 
 
 Managers can generate custom reports (e.g., performance, resource usage, project progress).
 
-Use data visualization libraries (e.g., D3.js, Chart.js) to represent data visually.
+Use data visualization libraries (e.g., D3.js, Chart.js) to represent data visually. --- check[x]
 
 Integrations:
 
