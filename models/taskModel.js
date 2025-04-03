@@ -31,6 +31,13 @@ const taskSchema = new mongoose.Schema(
       ref: "users",
       required: true,
     },
+    // Add this to your existing taskModel schema
+    aiRecommendation: {
+      priority: String,
+      explanation: String,
+      confidenceScore: Number,
+      timestamp: Date,
+    },
 
     // dependencies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
     estimatedTime: { type: Number, required: true }, // Estimated time in hours

@@ -23,6 +23,7 @@
     "mongoose": "^8.12.1",
     "next-auth": "^4.24.11",
     "nodemon": "^3.1.9",
+    "openai": "^4.91.1",
     "passport": "^0.7.0",
     "passport-github2": "^0.1.12",
     "passport-google-oauth20": "^2.0.0",
