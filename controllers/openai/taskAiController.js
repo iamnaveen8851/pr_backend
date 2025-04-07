@@ -57,7 +57,7 @@ const applyAiPriority = async (req, res) => {
     // Get the task
     const task = await taskModel.findById(taskId);
 
-    console.log("task.......", task);
+    // console.log("task.......", task);
     if (!task) {
       return res.status(404).json({ message: "Task not found" });
     }

@@ -15,6 +15,9 @@ const commentRouter = require("./routes/commentRouter");
 const notificationRouter = require("./routes/notificationRouter");
 const configureSocket = require("./utils/socket");
 const aiRouter = require("./routes/aiRouter");
+const timeTrackingRouter = require("./routes/timeTrackingRouter");
+const reportRouter = require("./routes/reportRouter");
+const taskAllocationRouter = require("./routes/taskAllocationRouter");
 
 // create server using express
 const app = express();
@@ -76,7 +79,10 @@ app.use("/projects", projectRouter);
 app.use("/auth", authRouter);
 app.use("/comments", commentRouter);
 app.use("/notifications", notificationRouter);
-app.use("/ai", aiRouter)
+app.use("/ai", aiRouter);
+app.use("/time-tracking", timeTrackingRouter);
+app.use("/reports", reportRouter)
+app.use("/task-allocation", taskAllocationRouter)
 
 const PORT = process.env.PORT || 8080;
 

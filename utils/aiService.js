@@ -73,17 +73,22 @@ const getTaskPriorityRecommendation = async (task, userTasks, allTasks) => {
   }
 };
 
-
 /**
  * Learn from user feedback by comparing AI recommendation with user choice
  * @param {String} taskId - Task ID
  * @param {String} aiRecommendedPriority - AI recommended priority
  * @param {String} userSetPriority - User set priority
  */
-const learnFromUserFeedback = async (taskId, aiRecommendedPriority, userSetPriority) => {
+const learnFromUserFeedback = async (
+  taskId,
+  aiRecommendedPriority,
+  userSetPriority
+) => {
   // In a production system, you would store this data for model improvement
-  console.log(`Learning from feedback: Task ${taskId}, AI: ${aiRecommendedPriority}, User: ${userSetPriority}`);
-  
+  console.log(
+    `Learning from feedback: Task ${taskId}, AI: ${aiRecommendedPriority}, User: ${userSetPriority}`
+  );
+
   // You could store this data in a separate collection for later analysis
   // For now, we'll just log it
 };
@@ -96,13 +101,13 @@ const learnFromUserFeedback = async (taskId, aiRecommendedPriority, userSetPrior
 const analyzeTaskPatterns = async (tasks) => {
   try {
     // Extract key information from tasks
-    const taskData = tasks.map(task => ({
+    const taskData = tasks.map((task) => ({
       title: task.title,
       priority: task.priority,
       status: task.status,
       assignedTo: task.assignedTo?.username,
       estimatedTime: task.estimatedTime,
-      deadline: task.deadline
+      deadline: task.deadline,
     }));
 
     // Prepare the prompt
@@ -130,8 +135,12 @@ const analyzeTaskPatterns = async (tasks) => {
     const response = await openAi.chat.completions.create({
       model: "gpt-4", // Changed from gpt-3.5-turbo to gpt-4
       messages: [
-        { role: "system", content: "You are an AI task analysis assistant. Your job is to analyze task data and identify patterns and insights." },
-        { role: "user", content: prompt }
+        {
+          role: "system",
+          content:
+            "You are an AI task analysis assistant. Your job is to analyze task data and identify patterns and insights.",
+        },
+        { role: "user", content: prompt },
       ],
       temperature: 0.3,
       max_tokens: 1000,
@@ -140,7 +149,7 @@ const analyzeTaskPatterns = async (tasks) => {
     // Parse the response
     const content = response.choices[0].message.content;
     const jsonMatch = content.match(/\{[\s\S]*\}/);
-    
+
     if (jsonMatch) {
       return JSON.parse(jsonMatch[0]);
     } else {
@@ -150,14 +159,83 @@ const analyzeTaskPatterns = async (tasks) => {
     console.error("Error analyzing task patterns:", error);
     return {
       error: error.message,
-      message: "Unable to analyze task patterns"
+      message: "Unable to analyze task patterns",
     };
   }
 };
 
+// Add this function to your existing aiService.js file
+
+/**
+ * Get task allocation recommendations based on user performance and workload
+ * @param {Object} task - The task object
+ * @param {Array} userData - Array of user data with performance metrics and workload
+ * @returns {Object} - Allocation recommendations
+ */
+const getTaskAllocationRecommendations = async (task, userData) => {
+  try {
+    // Optimized prompt for faster response
+    const prompt = `
+    Task: ${task.title}
+    Priority: ${task.priority || "Medium"}
+    Estimated Time: ${task.estimatedTime || "Not specified"} hours
+    Deadline: ${
+      task.deadline
+        ? new Date(task.deadline).toISOString().split("T")[0]
+        : "None"
+    }
+    
+    Available Users: ${JSON.stringify(userData, null, 2)}
+    
+    Recommend the top 3 most suitable users for this task based on:
+    - Current workload
+    - Skillset matching
+    - Task priority and deadline
+    
+    Provide a JSON response with only userId and username:
+    {
+      "recommendations": [
+        { "userId": "id", "username": "name" }
+      ]
+    }
+    `;
+
+    // Call OpenAI API
+    const response = await openAi.chat.completions.create({
+      model: "gpt-4",
+      messages: [
+        {
+          role: "system",
+          content:
+            "You are an AI assistant optimizing task allocation based on user data. Respond strictly in JSON format with only userId and username.",
+        },
+        { role: "user", content: prompt },
+      ],
+      temperature: 0.2,
+      max_tokens: 500,
+    });
+
+    // Parse JSON response
+    const content = response.choices[0].message.content;
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
+    } else {
+      throw new Error("Failed to parse AI response");
+    }
+
+    
+  } catch (error) {
+    console.error("Error fetching task allocation recommendations:", error);
+    return { recommendations: [], error: error.message };
+  }
+};
+
+// Add this to your module.exports
 module.exports = {
   getTaskPriorityRecommendation,
   learnFromUserFeedback,
-  analyzeTaskPatterns
+  analyzeTaskPatterns,
+  getTaskAllocationRecommendations,
 };
-

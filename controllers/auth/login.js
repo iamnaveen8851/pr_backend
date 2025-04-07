@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 require("dotenv").config();
 
 const login = async (req, res) => {
-  console.log("login route triggered", req.body);
+  // console.log("login route triggered", req.body);
 
   const { email, password } = req.body;
   try {
