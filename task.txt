@@ -18,7 +18,7 @@ Tasks are organized within projects, and each project can have different workflo
 
 Drag-and-drop functionality for task reordering and status updates (Kanban board view). ---check[x]
 
-AI-Powered Task Prioritization:
+AI-Powered Task Prioritization: --- check[x]
 
 Use an AI model (possibly GPT-4 or a custom model) to automatically suggest task prioritization based on factors such as urgency, dependencies, and historical task completion data.
 
