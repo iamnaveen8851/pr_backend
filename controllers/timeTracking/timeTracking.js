@@ -1,5 +1,6 @@
 const taskModel = require("../../models/taskModel");
 const timeEntryModel = require("../../models/timeEntryModel");
+const { getIO } = require("../../utils/socket");
 
 const startTimeTracking = async (req, res) => {
   try {
@@ -34,7 +35,7 @@ const startTimeTracking = async (req, res) => {
     // Create a new time entry with explicit user ID
     const newTimeEntry = new timeEntryModel({
       task: taskId,
-      user: userId, // This is already correct
+      user: userId,
       startTime: new Date(),
       isActive: true,
     });
@@ -43,13 +44,21 @@ const startTimeTracking = async (req, res) => {
 
     // Update task with last time entry
     task.lastTimeEntry = newTimeEntry._id;
-    await task.save(); // save the task with the new lastTimeEntry
+    await task.save();
 
     // Return the populated time entry
     const populatedEntry = await timeEntryModel
       .findById(newTimeEntry._id)
       .populate("task", "title description priority status project")
       .populate("user", "username email");
+
+    // Emit socket event for live updates
+    const io = getIO();
+    io.to(task.project.toString()).emit("time-tracking-started", {
+      timeEntry: populatedEntry,
+      taskId: taskId,
+      userId: userId,
+    });
 
     res.status(201).json({
       message: "Time tracking started successfully",
@@ -85,15 +94,15 @@ const stopTimeTracking = async (req, res) => {
 
     // Update the time entry
     activeTimeEntry.endTime = new Date();
-    activeTimeEntry.isActive = false; // Set isActive to false when stopping
-    
+    activeTimeEntry.isActive = false;
+
     // Calculate duration in minutes
     const startTime = new Date(activeTimeEntry.startTime);
     const endTime = new Date(activeTimeEntry.endTime);
     const durationInMinutes = Math.round((endTime - startTime) / (1000 * 60));
     activeTimeEntry.duration = durationInMinutes;
-    
-    await activeTimeEntry.save(); // save the updated time entry with stop time
+
+    await activeTimeEntry.save();
 
     // Update task's actual time spent
     const task = await taskModel.findById(activeTimeEntry.task);
@@ -101,7 +110,16 @@ const stopTimeTracking = async (req, res) => {
     if (task) {
       task.actualTimeSpent =
         (task.actualTimeSpent || 0) + activeTimeEntry.duration;
-      await task.save(); // save the updated task with new actual time spent
+      await task.save();
+
+      // Emit socket event for live updates
+      const io = getIO();
+      io.to(task.project.toString()).emit("time-tracking-stopped", {
+        timeEntry: activeTimeEntry,
+        taskId: task._id,
+        userId: userId,
+        totalTimeSpent: task.actualTimeSpent,
+      });
     }
 
     res.status(200).json({
@@ -137,9 +155,8 @@ const getUserTimeEntries = async (req, res) => {
     if (projectId) {
       const tasks = await taskModel.find({ project: projectId }).select("_id");
 
-      
       const taskIds = tasks.map((task) => task._id);
-      
+
       query.task = { $in: taskIds }; // check this once while testing if you get any error
     }
 

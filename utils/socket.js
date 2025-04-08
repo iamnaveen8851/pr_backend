@@ -1,7 +1,9 @@
 const socketIo = require("socket.io");
 
+let io;
+
 const configureSocket = (server) => {
-  const io = socketIo(server, {
+  io = socketIo(server, {
     cors: {
       // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
       // origin: "https://pr-frontendtesting01.vercel.app", // new pro url
@@ -32,13 +34,27 @@ const configureSocket = (server) => {
       console.log(`Task update in project ${data.projectId}`, data);
     });
 
+    // Handle time tracking updates
+    socket.on("time-tracking-update", (data) => {
+      socket.to(data.projectId).emit("time-tracking-updated", data);
+      console.log(`Time tracking update in project ${data.projectId}`, data);
+    });
+
     // Handle disconnect
     socket.on("disconnect", () => {
       console.log("Client disconnected:", socket.id);
     });
   });
 
-  return io; // Ensure io is returned here
+  return io;
 };
 
-module.exports = configureSocket;
+// Function to get the io instance
+const getIO = () => {
+  if (!io) {
+    throw new Error("Socket.io not initialized!");
+  }
+  return io;
+};
+
+module.exports = { configureSocket, getIO };

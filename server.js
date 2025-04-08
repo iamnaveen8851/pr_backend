@@ -13,7 +13,7 @@ const MongoStore = require("connect-mongo");
 const http = require("http");
 const commentRouter = require("./routes/commentRouter");
 const notificationRouter = require("./routes/notificationRouter");
-const configureSocket = require("./utils/socket");
+const { configureSocket } = require("./utils/socket");
 const aiRouter = require("./routes/aiRouter");
 const timeTrackingRouter = require("./routes/timeTrackingRouter");
 const reportRouter = require("./routes/reportRouter");
@@ -23,7 +23,7 @@ const taskAllocationRouter = require("./routes/taskAllocationRouter");
 const app = express();
 // create server using http
 const server = http.createServer(app);
-const io = configureSocket(server);
+let io = configureSocket(server);
 
 // Ensure the Socket.io instance is set on the app
 app.set("io", io);
@@ -80,8 +80,8 @@ app.use("/comments", commentRouter);
 app.use("/notifications", notificationRouter);
 app.use("/ai", aiRouter);
 app.use("/time-tracking", timeTrackingRouter);
-app.use("/reports", reportRouter)
-app.use("/task-allocation", taskAllocationRouter)
+app.use("/reports", reportRouter);
+app.use("/task-allocation", taskAllocationRouter);
 
 const PORT = process.env.PORT || 8080;
 
