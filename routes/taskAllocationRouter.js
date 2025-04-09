@@ -11,14 +11,12 @@ const taskAllocationRouter = Router();
 taskAllocationRouter.get(
   "/:taskId/recommendations",
   authMiddleware,
-  // authorizeRoles("Manager", "Admin"),
   getTaskAllocation
 );
 
 taskAllocationRouter.post(
   "/:taskId/allocate",
   authMiddleware,
-  // authorizeRoles("Manager", "Admin"),
   applyTaskAllocation
 );
 
