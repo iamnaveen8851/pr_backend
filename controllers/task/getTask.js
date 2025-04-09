@@ -3,11 +3,15 @@ const taskModel = require("../../models/taskModel");
 const getTask = async (req, res) => {
   try {
     // First, let's check if the project field exists in any tasks
-    const taskWithProject = await taskModel.findOne({ project: { $exists: true, $ne: null } });
+    const taskWithProject = await taskModel.findOne({
+      project: { $exists: true, $ne: null },
+    });
     console.log("Task with project field:", taskWithProject);
-
+    const userId = req.user.userId;
     const allTasks = await taskModel
-      .find()
+      .find
+      // {createdBy: userId,}
+      ()
       .populate("assignedTo", "username role")
       .populate("assignedBy", "username role")
       .populate("project", "name description")
