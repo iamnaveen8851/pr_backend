@@ -60,9 +60,9 @@ app.use(cookieParser());
 // cors configuration
 app.use(
   cors({
-    origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+    // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
 
-    // origin: "http://localhost:5173", // DEV URL
+    origin: "http://localhost:5173", // DEV URL
      // origin:  "https://ad26-2405-201-4021-1a06-4f9-9612-eb82-628a.ngrok-free.app", 
 
     credentials: true, // enable set-cookie headers
