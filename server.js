@@ -85,6 +85,7 @@ app.use("/reports", reportRouter);
 app.use("/task-allocation", taskAllocationRouter);
 
 const PORT = process.env.PORT || 8080;
+console.log("PORT:", PORT);
 
 app.get("/", (_, res) => {
   res.send("Welcome to the server!");
