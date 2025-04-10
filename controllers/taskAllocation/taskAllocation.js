@@ -18,7 +18,7 @@ const getTaskAllocation = async (req, res) => {
 
     // Get all eligible users (based on role, etc.)
     const eligibleUsers = await userModel.find({
-      role: { $in: ["Employee", "Manager", "Admin"] },
+      role: { $in: ["Employee", "Manager"] },
     });
 
     // Get performance metrics for all users

@@ -18,6 +18,7 @@ const aiRouter = require("./routes/aiRouter");
 const timeTrackingRouter = require("./routes/timeTrackingRouter");
 const reportRouter = require("./routes/reportRouter");
 const taskAllocationRouter = require("./routes/taskAllocationRouter");
+const passwordReset = require("./routes/resetPasswordRouter");
 
 // create server using express
 const app = express();
@@ -58,14 +59,25 @@ app.use(express.json());
 app.use(cookieParser());
 
 // cors configuration
+// app.use(
+//   cors({
+
+//     // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
+
+//     origin: "http://localhost:5173", // DEV URL
+//      // origin:  "https://ad26-2405-201-4021-1a06-4f9-9612-eb82-628a.ngrok-free.app",
+
+//     credentials: true, // enable set-cookie headers
+//   })
+// );
+
 app.use(
   cors({
-    origin: "https://pr-frontend-one.vercel.app", // // PRO URL
-
-    // origin: "http://localhost:5173", // DEV URL
-     // origin:  "https://ad26-2405-201-4021-1a06-4f9-9612-eb82-628a.ngrok-free.app", 
-
-    credentials: true, // enable set-cookie headers
+    origin:
+      process.env.NODE_ENV === "production"
+        ? process.env.PRO_URL
+        : process.env.DEV_URL,
+    credentials: true,
   })
 );
 
@@ -85,6 +97,7 @@ app.use("/ai", aiRouter);
 app.use("/time-tracking", timeTrackingRouter);
 app.use("/reports", reportRouter);
 app.use("/task-allocation", taskAllocationRouter);
+app.use("/password", passwordReset);
 
 const PORT = process.env.PORT || 8080;
 console.log("PORT:", PORT);
