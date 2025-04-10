@@ -18,7 +18,7 @@ taskAllocationRouter.get(
 taskAllocationRouter.post(
   "/:taskId/allocate",
   authMiddleware,
-  authorizeRoles("Admin", "Manager"),
+   authorizeRoles("Admin", "Manager"),
   applyTaskAllocation
 );
 
