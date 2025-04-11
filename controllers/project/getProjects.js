@@ -2,8 +2,9 @@ const projectModel = require("../../models/projectModel");
 
 const getProjects = async (req, res) => {
   try {
+    const userId = req.user.userId;
     const projects = await projectModel
-      .find()
+      .find({ $or: [{ team: userId }, { manager: userId }] })
       .populate("createdBy", "username")
       .populate("manager", "username")
       .populate("team", "username");

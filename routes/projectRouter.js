@@ -45,7 +45,7 @@ projectRouter.patch(
 projectRouter.delete(
   "/deleteProject/:id",
   authMiddleware,
-  authorizeRoles("Admin"),
+  authorizeRoles("Admin", "Manager"),
   deleteProject
 );
 

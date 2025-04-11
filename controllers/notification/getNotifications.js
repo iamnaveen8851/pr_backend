@@ -4,11 +4,11 @@ const mongoose = require("mongoose"); // Add this import
 const getNotifications = async (req, res) => {
   try {
     const userId = req.user.userId;
-    console.log("User ID from request:", userId);
+    // console.log("User ID from request:", userId);
 
     // Convert userId string to ObjectId
     const userObjectId = new mongoose.Types.ObjectId(userId);
-    console.log("User ObjectId:", userObjectId);
+    // console.log("User ObjectId:", userObjectId);
 
     // Check if there are any notifications for this user
     const count = await notificationModel.countDocuments({
@@ -35,7 +35,7 @@ const getNotifications = async (req, res) => {
       })
       .limit(50);
 
-    console.log("Fetched Notifications:", notifications);
+    // console.log("Fetched Notifications:", notifications);
 
     res.status(200).json({
       message: "Notifications fetched successfully",

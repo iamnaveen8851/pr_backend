@@ -6,7 +6,7 @@ const generateToken = require("../../lib/jwtToken");
 require("dotenv").config();
 
 const signup = async (req, res) => {
-  console.log("signup route triggered", req.body);
+ 
   const { username, email, password, role } = req.body;
   try {
     const existingUser = await userModel.findOne({ email });

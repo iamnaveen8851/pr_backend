@@ -58,19 +58,6 @@ app.use(passport.session());
 app.use(express.json());
 app.use(cookieParser());
 
-// cors configuration
-// app.use(
-//   cors({
-
-//     // origin: "https://pr-frontend-one.vercel.app", // // PRO URL
-
-//     origin: "http://localhost:5173", // DEV URL
-//      // origin:  "https://ad26-2405-201-4021-1a06-4f9-9612-eb82-628a.ngrok-free.app",
-
-//     credentials: true, // enable set-cookie headers
-//   })
-// );
-
 app.use(
   cors({
     origin:
@@ -82,10 +69,10 @@ app.use(
 );
 
 // Log all incoming requests for debugging
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path} - Cookies:`, req.cookies);
-  next();
-});
+// app.use((req, res, next) => {
+//   console.log(`${req.method} ${req.path} - Cookies:`, req.cookies);
+//   next();
+// });
 
 app.use("/users", userRouter);
 app.use("/tasks", taskRouter);
@@ -100,7 +87,6 @@ app.use("/task-allocation", taskAllocationRouter);
 app.use("/password", passwordReset);
 
 const PORT = process.env.PORT || 8080;
-console.log("PORT:", PORT);
 
 app.get("/", (_, res) => {
   res.send("Welcome to the server!");

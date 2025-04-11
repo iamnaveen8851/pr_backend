@@ -6,12 +6,12 @@ const getTask = async (req, res) => {
     const taskWithProject = await taskModel.findOne({
       project: { $exists: true, $ne: null },
     });
-    console.log("Task with project field:", taskWithProject);
+
     const userId = req.user.userId;
+    console.log("user", userId);
+
     const allTasks = await taskModel
-      .find
-      // {createdBy: userId,}
-      ()
+      .find({ $or: [{ assignedTo: userId }, { createdBy: userId }] })
       .populate("assignedTo", "username role")
       .populate("assignedBy", "username role")
       .populate("project", "name description")
